@@ -9,13 +9,15 @@
 
 namespace Application\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use Core\Controller\ActionController;
 use Zend\View\Model\ViewModel;
 
-class IndexController extends AbstractActionController
+class IndexController extends ActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+        return new ViewModel(array(
+        	'posts' => self::getTable('Application\Model\Post')->fetchAll()->toArray()
+        ));
     }
 }
